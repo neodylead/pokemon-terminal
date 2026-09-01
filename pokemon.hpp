@@ -1,63 +1,72 @@
 #ifndef POKEMON_HPP
 #define POKEMON_HPP
 
-
 #include "move.hpp"
 #include "type.hpp"
-#include <vector>
 #include <string>
+#include <vector>
 
-class Pokemon {
+class Pokemon
+{
+private:
+    // Identity
+    int id;
+    std::string name;
 
-    private:
+    // Progression
+    int level;
+    int exp;
 
-        int id;
+    // Current battle state
+    int hp;
 
-        std::string name;
+    // Individual stats
+    int maxHp;
+    int attack;
+    int defense;
+    int special;
+    int speed;
 
-        int level;
+    // Other information
+    std::string nature;
+    std::string ability;
 
-        int exp;
+    // Moves
+    std::vector<Move> moves;
 
-        int hp;
+public:
+    // Constructor
+    Pokemon(int id, std::string name, int level);
 
-        int base_maxHp;
+    // Getters
+    int get_id() const;
+    std::string get_name() const;
+    int get_level() const;
+    int get_exp() const;
+    int get_hp() const;
 
-        int base_attack;
+    int get_maxHp() const;
+    int get_attack() const;
+    int get_defense() const;
+    int get_special() const;
+    int get_speed() const;
 
-        int base_defense;
+    std::string get_nature() const;
+    std::string get_ability() const;
 
-        int base_special;
+    // Controlled modification
+    void set_name(std::string new_name);
+    void set_level(int new_level);
+    void set_exp(int new_exp);
 
-        int base_speed;
+    void take_damage(int damage);
+    void heal(int amount);
+    void gain_exp(int amount);
+    void level_up();
 
-        Type type1;
-
-        Type type2;
-
-        std::string nature;
-
-        std::string ability;
-
-        std::vector<Move> moves;
-
-    public:
-
-        Pokemon(
-
-            int id,
-            std::string name,
-            int level
-
-        );
-
-        std::string get_name();
-
-        void add_move(Move move_to_add);
-
-        void list_moves();
+    // Moves
+    void add_move(Move move_to_add);
+    void list_moves() const;
 };
-
-
 
 #endif

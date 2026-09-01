@@ -22,10 +22,20 @@ class Move {
 
 
     public:
+        //constructor
 
         Move(int id, std::string name, int power);
 
-        std::string get_name();
+        //getters
+
+        std::string get_name() const;
+
+        int get_power() const;
+
+        int get_accuracy() const;
+
+        bool is_special() const;
+
 };
 
 

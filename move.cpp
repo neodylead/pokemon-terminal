@@ -10,9 +10,26 @@ Move::Move(int id, std::string name, int power){
 
 }
 
-std::string Move::get_name(){
+std::string Move::get_name() const{
 
     return name;    
 
+}
+
+int Move::get_power() const{
+
+    return power;
+
+}
+
+int Move::get_accuracy() const{
+
+    return accuracy;
+
+}
+
+bool Move::is_special() const{
+
+    return special;
 
 }
