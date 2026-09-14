@@ -20,6 +20,7 @@ Pokemon::Pokemon(int id, std::string name, int level)
     special = 0;
     speed = 0;
 
+    moves = {};
 
     nature = "";
     ability = "";
@@ -78,6 +79,11 @@ int Pokemon::get_speed() const
     return speed;
 }
 
+std::vector<Move> Pokemon::get_moves() const
+{
+    return moves;
+}
+
 std::string Pokemon::get_nature() const
 {
     return nature;
@@ -103,6 +109,33 @@ void Pokemon::set_level(int new_level)
 void Pokemon::set_exp(int new_exp)
 {
     exp = new_exp;
+}
+
+// Stat Setters
+
+void Pokemon::set_maxHp(int amount)
+{
+    maxHp = amount;
+}
+
+void Pokemon::set_attack(int amount)
+{
+    attack = amount;
+}
+
+void Pokemon::set_defense(int amount)
+{
+    defense = amount;
+}
+
+void Pokemon::set_special(int amount)
+{
+    special = amount;
+}
+
+void Pokemon::set_speed(int amount)
+{
+    speed = amount;
 }
 
 // Battle-related functions

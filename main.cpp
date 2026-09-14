@@ -2,9 +2,11 @@
 #include "move.hpp"
 #include "menu.hpp"
 #include "species.hpp"
+#include "battle.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <thread>
 
 using namespace std;
 
@@ -38,7 +40,11 @@ Pokemon new_pokemon(const Species& species, int level)
         level
     );
 
-    p.heal(species.get_base_maxHp());
+    p.set_maxHp(species.get_base_maxHp());
+    p.set_attack(species.get_base_attack());
+    p.set_defense(species.get_base_defense());
+    p.set_special(species.get_base_special());
+    p.set_speed(species.get_base_speed());
 
     return p;
 }
@@ -53,15 +59,15 @@ int main(){
 
     vector<Species> pokedex;
 
-    std::ifstream file("pokedex.csv");
+    ifstream file("pokedex.csv");
 
     if (!file.is_open())
     {
-        std::cout << "Failed to open file!" << std::endl;
+        std::cout << "Failed to open file!" << endl;
         return 1;
     }
 
-    std::cout << "File opened!" << std::endl;
+    cout << "File opened!" << endl;
 
     string line;
 
@@ -116,11 +122,75 @@ int main(){
 
     }
 
-    cout << pokedex[150].get_name();
+    Move thunderbolt(1, "Thunderbolt", 80);
+
+    Move quick_attack(2, "Quick Attack", 30);
 
     Pokemon sparky = new_pokemon(pokedex[24], 5);
 
+    Pokemon ratty = new_pokemon(pokedex[18], 5);
 
-    menu.pokemon_menu(sparky);
+    sparky.add_move(thunderbolt);
+    sparky.add_move(quick_attack);
+
+    vector<string> main_menu_options = {"Pokemon", "Battle", "Something", "Exit"};
+
+    // Main Game Loop
+
+    int main_menu_choice = 0;
+
+    while (main_menu_choice != 3)
+    {
+        main_menu_choice = menu.main_menu(main_menu_options);
+
+        switch (main_menu_choice)
+        {
+            case 0:
+            {   
+                system("clear");
+                cout << "Pokemon selected!" << endl;
+                break;
+            }
+
+
+                break;
+            
+            case 1:
+            {
+                system("clear");
+                Battle wild_battle(sparky, ratty);
+
+                cout << "Battle selected!" << endl;
+
+                wild_battle.start();
+
+                while (wild_battle.check_faint())
+                {
+                    wild_battle.player_turn();
+                }
+            }
+
+            case 2:
+            {
+                system("clear");
+                cout << "Something selected!" << endl;
+                break;
+            }
+
+            case 3:
+            {
+                break;
+            }   
+            default:
+            {
+                system("clear");
+                cout << "Invalid input!" << endl;
+            
+            }    break;
+        }
+    }
+
+
+    
 
 }

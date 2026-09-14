@@ -51,8 +51,18 @@ public:
     int get_special() const;
     int get_speed() const;
 
+    std::vector<Move> get_moves() const;
+
     std::string get_nature() const;
     std::string get_ability() const;
+
+    // Stat Setters
+
+    void set_maxHp(int amount);
+    void set_attack(int amount);
+    void set_defense(int amount);
+    void set_special(int amount);
+    void set_speed(int amount);
 
     // Controlled modification
     void set_name(std::string new_name);
